@@ -1,0 +1,870 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Runway Studio | AI production studio, Manila</title>
+<meta name="description" content="Runway Studio is an AI production studio out of Manila, Philippines. Films, key visuals, social content and episodic series for agencies and brands.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Runway Studio">
+<meta property="og:title" content="Runway Studio | AI production studio, Manila">
+<meta property="og:description" content="Runway Studio is an AI production studio out of Manila, Philippines. Films, key visuals, social content and episodic series for agencies and brands.">
+<meta name="theme-color" content="#0A0A0C">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preload" href="fonts/inter-tight.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+@font-face { font-family: "Inter"; src: url("fonts/inter.woff2") format("woff2"); font-weight: 100 900; font-style: normal; font-display: swap; }
+@font-face { font-family: "Inter Tight"; src: url("fonts/inter-tight.woff2") format("woff2"); font-weight: 100 900; font-style: normal; font-display: swap; }
+@font-face { font-family: "Geist Mono"; src: url("fonts/geist-mono-400.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "Geist Mono"; src: url("fonts/geist-mono-500.woff2") format("woff2"); font-weight: 500; font-style: normal; font-display: swap; }
+img { max-width: 100%; }
+[hidden] { display: none !important; }
+
+/* Layout concept: a night approach into Manila. One dark screening-room world in the
+   studio's own ink and coral; the hero is a runway seen from the cockpit, and the
+   process section is the same runway seen from above. Everything else stays quiet:
+   rounded panels, hairline borders, one accent. */
+:root {
+  color-scheme: dark;
+  --bg: #0A0A0C;
+  --surface: #111114;
+  --surface-2: #17171B;
+  --line: #25252B;
+  --line-2: #35353D;
+  --text: #F4F3F1;
+  --muted: #A4A4AE;
+  --faint: #74747F;
+  --coral: #FF5C4D;
+  --coral-soft: #FF8B7D;
+  --on-coral: #190705;
+  --light: #FFE9D6;
+
+  --f-display: "Inter Tight", "Inter", "Helvetica Neue", Arial, sans-serif;
+  --f-body: "Inter", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --f-mono: "Geist Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+  --t-xs: 0.75rem;
+  --t-sm: 0.875rem;
+  --t-base: 1.0625rem;
+  --t-lg: 1.25rem;
+  --t-h3: 1.375rem;
+  --t-h2: clamp(1.9rem, 2.6vw + 1.1rem, 3.1rem);
+  --t-hero: clamp(2.7rem, 6.2vw + 0.6rem, 6.1rem);
+
+  --r: 18px;
+  --gutter: clamp(16px, 4vw, 40px);
+  --section: clamp(72px, 9vw, 128px);
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--f-body);
+  font-size: var(--t-base);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; }
+p, h1, h2, h3, ol, ul, dl, dd, figure { margin: 0; }
+ol, ul { padding: 0; list-style: none; }
+h1, h2, h3 { text-wrap: balance; font-family: var(--f-display); }
+:focus-visible { outline: 2px solid var(--coral); outline-offset: 3px; border-radius: 6px; }
+::selection { background: var(--coral); color: var(--on-coral); }
+
+.wrap { max-width: 1200px; margin-inline: auto; padding-inline: var(--gutter); }
+.mono { font-family: var(--f-mono); font-size: var(--t-xs); letter-spacing: 0.06em; text-transform: uppercase; }
+.muted { color: var(--muted); }
+.eyebrow { color: var(--coral-soft); }
+
+/* buttons */
+.btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  padding: 13px 22px;
+  border-radius: 999px;
+  border: 1px solid var(--line-2);
+  background: transparent;
+  color: var(--text);
+  font-family: var(--f-body);
+  font-weight: 600;
+  font-size: var(--t-sm);
+  text-decoration: none;
+  cursor: pointer;
+  overflow: hidden;
+  transition: transform 160ms var(--ease), border-color 150ms ease, background-color 150ms ease;
+}
+.btn:active { transform: scale(0.97); }
+.btn.primary { background: var(--coral); border-color: var(--coral); color: var(--on-coral); }
+@media (hover: hover) and (pointer: fine) {
+  .btn:hover { border-color: var(--text); }
+  .btn.primary:hover { border-color: var(--coral-soft); background: var(--coral-soft); }
+}
+.btn.small { padding: 9px 16px; font-size: 0.8125rem; }
+.copy { display: inline-grid; }
+.copy .lbl {
+  grid-area: 1 / 1;
+  transition: opacity 200ms var(--ease), transform 200ms var(--ease), filter 200ms var(--ease);
+}
+.copy .lbl.b, .copy[data-state="done"] .lbl.a { opacity: 0; filter: blur(2px); }
+.copy .lbl.b { transform: translateY(4px); }
+.copy[data-state="done"] .lbl.a { transform: translateY(-4px); }
+.copy[data-state="done"] .lbl.b { opacity: 1; transform: none; filter: none; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+
+/* floating nav */
+.nav {
+  position: sticky;
+  top: env(safe-area-inset-top, 0px);
+  z-index: 20;
+  padding-block: 12px;
+}
+.nav-in {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 8px 8px 8px 20px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(14, 14, 17, 0.78);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+}
+.mark {
+  margin-right: auto;
+  font-family: var(--f-display);
+  font-weight: 800;
+  font-size: 1.0625rem;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.mark i { font-style: normal; color: var(--coral); }
+.links { display: none; gap: 22px; font-size: var(--t-sm); color: var(--muted); }
+.links a { text-decoration: none; transition: color 150ms ease; }
+@media (hover: hover) and (pointer: fine) { .links a:hover { color: var(--text); } }
+@media (min-width: 900px) { .links { display: flex; } }
+
+/* hero */
+.hero { position: relative; overflow: hidden; margin-top: -68px; padding-top: 68px; }
+.hero canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(10, 10, 12, 0.72) 0%, rgba(10, 10, 12, 0.35) 45%, rgba(10, 10, 12, 0) 70%),
+    linear-gradient(0deg, var(--bg) 0%, rgba(10, 10, 12, 0) 22%);
+  pointer-events: none;
+}
+@media (min-width: 900px) {
+  .hero::after {
+    background:
+      linear-gradient(90deg, rgba(10, 10, 12, 0.94) 0%, rgba(10, 10, 12, 0.8) 44%, rgba(10, 10, 12, 0) 72%),
+      linear-gradient(0deg, var(--bg) 0%, rgba(10, 10, 12, 0) 22%);
+  }
+}
+.hero-in {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 26px;
+  padding-block: 40px 300px;
+}
+@media (min-width: 900px) { .hero-in { padding-block: clamp(64px, 8vw, 112px) clamp(88px, 10vw, 136px); } }
+.chip {
+  justify-self: start;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 14px;
+  border: 1px solid var(--line-2);
+  border-radius: 999px;
+  background: rgba(14, 14, 17, 0.6);
+  color: var(--muted);
+}
+.chip b { width: 6px; height: 6px; border-radius: 50%; background: var(--coral); box-shadow: 0 0 10px var(--coral); }
+.hero h1 {
+  font-size: var(--t-hero);
+  font-weight: 800;
+  line-height: 0.98;
+  letter-spacing: -0.035em;
+  max-width: 11em;
+}
+.hero h1 em { font-style: normal; color: var(--coral); }
+.lede { font-size: var(--t-lg); line-height: 1.5; max-width: 31em; color: var(--muted); }
+.lede strong { color: var(--text); font-weight: 500; }
+.actions { display: flex; flex-wrap: wrap; gap: 12px; }
+.facts { display: flex; flex-wrap: wrap; gap: 8px 28px; margin-top: 18px; color: var(--faint); }
+.facts span b { color: var(--muted); font-weight: 500; margin-left: 8px; }
+
+/* marquee of deliverables */
+.ticker { border-block: 1px solid var(--line); overflow: hidden; }
+.ticker-track { display: flex; width: max-content; }
+.ticker ul { display: flex; flex: none; gap: 44px; padding: 18px 22px; color: var(--muted); }
+.ticker li { display: flex; align-items: center; gap: 44px; white-space: nowrap; }
+.ticker li::after { content: ""; width: 22px; height: 2px; background: var(--coral); }
+
+/* sections */
+.section { padding-block: var(--section) 0; }
+.head { display: grid; gap: 14px; max-width: 44rem; margin-bottom: clamp(28px, 4vw, 52px); }
+.head h2 { font-size: var(--t-h2); font-weight: 700; line-height: 1.04; letter-spacing: -0.028em; }
+
+/* panels with a cursor spotlight */
+.panel {
+  position: relative;
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  background: var(--surface);
+  overflow: hidden;
+  min-width: 0;
+}
+.glow {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 680px;
+  height: 680px;
+  margin: -340px 0 0 -340px;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(255, 92, 77, 0.17), rgba(255, 92, 77, 0));
+  opacity: 0;
+  transition: opacity 200ms ease;
+  pointer-events: none;
+}
+@media (hover: hover) and (pointer: fine) { .spot:hover .glow { opacity: 1; } }
+
+/* capabilities: seven cells */
+.bento { display: grid; gap: 14px; }
+.cell { display: flex; flex-direction: column; min-height: 210px; }
+.cell-body { position: relative; display: grid; gap: 8px; padding: 22px; margin-top: auto; }
+.cell h3 { font-size: var(--t-h3); font-weight: 700; letter-spacing: -0.015em; }
+.cell p { color: var(--muted); font-size: 0.9875rem; max-width: 34em; }
+.cell .spec { color: var(--faint); margin-top: 8px; }
+.art {
+  position: relative;
+  flex: 1;
+  min-height: 150px;
+  background:
+    radial-gradient(90% 120% at 86% 0%, rgba(255, 92, 77, 0.5), rgba(255, 92, 77, 0) 58%),
+    radial-gradient(70% 90% at 6% 100%, rgba(255, 233, 214, 0.14), rgba(255, 233, 214, 0) 60%),
+    var(--surface-2);
+  border-bottom: 1px solid var(--line);
+}
+.art img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+.art .ratio {
+  position: absolute;
+  left: 22px;
+  bottom: 14px;
+  font-family: var(--f-display);
+  font-weight: 800;
+  font-size: clamp(2.4rem, 5vw, 4.2rem);
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(244, 243, 241, 0.5);
+}
+@media (min-width: 960px) {
+  .bento { grid-template-columns: repeat(12, minmax(0, 1fr)); }
+  .c3 { grid-column: span 3; }
+  .c4 { grid-column: span 4; }
+  .c5 { grid-column: span 5; }
+  .c7 { grid-column: span 7; }
+  .c8 { grid-column: span 8; }
+  .cell.tall { min-height: 400px; }
+}
+
+/* work */
+.jobs { display: grid; gap: 14px; }
+@media (min-width: 820px) { .jobs { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.job { display: flex; flex-direction: column; }
+.job dl { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px 18px; padding: 20px 22px; border-bottom: 1px dashed var(--line-2); }
+.job dt { color: var(--faint); font-size: 0.6875rem; }
+.job dd { margin-top: 3px; font-size: var(--t-xs); letter-spacing: 0.04em; }
+.job-body { position: relative; display: grid; gap: 10px; padding: 22px 22px 26px; }
+.job h3 { font-size: 1.5rem; font-weight: 700; line-height: 1.12; letter-spacing: -0.02em; }
+.job p { color: var(--muted); max-width: 36em; }
+.also { margin-top: 26px; color: var(--muted); max-width: 46rem; }
+.also b { color: var(--text); font-weight: 500; }
+
+/* process: the runway from above */
+.strip {
+  position: relative;
+  height: 62px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--surface);
+  overflow: hidden;
+}
+.strip::before {
+  content: "";
+  position: absolute;
+  left: 18px;
+  top: 12px;
+  bottom: 12px;
+  width: 44px;
+  background: repeating-linear-gradient(0deg, var(--light) 0 4px, transparent 4px 9px);
+  opacity: 0.85;
+}
+.lane {
+  position: absolute;
+  left: 86px;
+  right: 18px;
+  top: 50%;
+  height: 3px;
+  margin-top: -1.5px;
+  overflow: hidden;
+}
+.lane i {
+  display: block;
+  width: calc(100% + 60px);
+  height: 100%;
+  background: repeating-linear-gradient(90deg, var(--coral) 0 34px, transparent 34px 60px);
+}
+.steps { display: grid; gap: 22px; margin-top: 26px; }
+.steps li { display: grid; gap: 6px; align-content: start; min-width: 0; }
+.steps .n { color: var(--coral-soft); }
+.steps h3 { font-size: var(--t-h3); font-weight: 700; letter-spacing: -0.015em; }
+.steps p { color: var(--muted); max-width: 36em; }
+@media (min-width: 1000px) { .steps { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 24px; } }
+
+/* agencies */
+.split { display: grid; gap: clamp(28px, 5vw, 64px); }
+@media (min-width: 900px) { .split { grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); align-items: start; } }
+.split .head { margin-bottom: 0; }
+.terms { display: grid; }
+.terms div { display: grid; gap: 6px; padding-block: 20px; border-top: 1px solid var(--line); }
+.terms div:last-child { border-bottom: 1px solid var(--line); }
+.terms dt { font-family: var(--f-display); font-weight: 700; font-size: var(--t-h3); letter-spacing: -0.015em; }
+.terms dd { color: var(--muted); max-width: 38em; }
+
+/* rates */
+.tiers { display: flex; flex-wrap: wrap; gap: 10px; margin-block: 22px; }
+.tiers li { padding: 8px 14px; border: 1px solid var(--line-2); border-radius: 999px; font-size: var(--t-sm); }
+.menu { padding: 6px 22px; }
+.menu li {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding-block: 13px;
+  border-bottom: 1px solid var(--line);
+  font-size: var(--t-sm);
+}
+.menu li:last-child { border-bottom: 0; }
+.menu li span:last-child { color: var(--faint); text-align: right; }
+
+/* contact */
+.cta {
+  position: relative;
+  display: grid;
+  gap: 22px;
+  padding: clamp(28px, 6vw, 72px);
+  border-radius: calc(var(--r) + 8px);
+  border: 1px solid var(--line-2);
+  background:
+    radial-gradient(80% 140% at 100% 0%, rgba(255, 92, 77, 0.34), rgba(255, 92, 77, 0) 60%),
+    var(--surface);
+  overflow: hidden;
+}
+.cta h2 { font-size: var(--t-hero); font-weight: 800; line-height: 0.98; letter-spacing: -0.035em; }
+.mail { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 16px; }
+.mail a {
+  font-family: var(--f-display);
+  font-weight: 700;
+  font-size: clamp(1.3rem, 2.2vw + 0.8rem, 2.1rem);
+  letter-spacing: -0.02em;
+  text-decoration-color: var(--coral);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 7px;
+  overflow-wrap: anywhere;
+}
+
+/* footer */
+.foot { margin-top: var(--section); border-top: 1px solid var(--line); }
+.foot .wrap { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 28px; padding-block: 26px; color: var(--faint); font-size: var(--t-sm); }
+.foot .mark { color: var(--text); }
+
+/* motion, to Emil Kowalski's standards: transform and opacity only, strong ease-out,
+   hover gated to fine pointers, and a gentler path under reduced motion */
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes enter { from { opacity: 0; transform: translateY(8px); } }
+  .in { animation: enter 300ms var(--ease) both; animation-delay: calc(var(--i, 0) * 50ms); }
+  @keyframes roll { to { transform: translateX(-50%); } }
+  .ticker-track { animation: roll 38s linear infinite; }
+  @keyframes taxi { to { transform: translateX(-60px); } }
+  .lane i { animation: taxi 1.5s linear infinite; }
+}
+@media (prefers-reduced-motion: no-preference) and (hover: hover) and (pointer: fine) {
+  .ticker:hover .ticker-track { animation-play-state: paused; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  @keyframes fade { from { opacity: 0; } }
+  .in { animation: fade 0.2s ease both; }
+  .btn:active { transform: none; opacity: 0.85; }
+  .copy .lbl, .copy .lbl.b, .copy[data-state="done"] .lbl.a { transform: none; filter: none; }
+  .ticker { overflow-x: auto; }
+}
+</style>
+</head>
+<body>
+<header class="nav">
+  <div class="wrap">
+    <div class="nav-in">
+      <a class="mark" href="#top" aria-label="Runway Studio, home">RUNWAY<i>.</i>STUDIO</a>
+      <nav class="links" aria-label="Sections">
+        <a href="#capabilities">Capabilities</a>
+        <a href="#work">Work</a>
+        <a href="#process">Process</a>
+        <a href="#agencies">Agencies</a>
+        <a href="#rates">Rates</a>
+      </nav>
+      <a class="btn primary small" href="#contact">Start a project</a>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <canvas id="rwy" aria-hidden="true"></canvas>
+    <div class="wrap hero-in">
+      <p class="chip mono in"><b></b>AI production studio, Manila</p>
+      <h1 class="in" style="--i:1">Brief in. <em>Broadcast-ready</em> out.</h1>
+      <p class="lede in" style="--i:2"><strong>Runway Studio is an AI production studio out of Manila, Philippines.</strong> We make films, key visuals, social content and episodic series for agencies and brands.</p>
+      <div class="actions in" style="--i:3">
+        <a class="btn primary" href="#contact">Start a project</a>
+        <a class="btn" href="#work">See the work</a>
+      </div>
+      <p class="facts mono in" style="--i:4">
+        <span>MNL<b>14.5995° N, 120.9842° E</b></span>
+        <span>Formats<b>16:9, 9:16, 1:1, 4:5</b></span>
+        <span>Runtimes<b>:06 to :60</b></span>
+      </p>
+    </div>
+  </section>
+
+  <div class="ticker mono" aria-label="What we deliver">
+    <div class="ticker-track">
+      <ul>
+        <li>TVCs</li><li>Manifesto films</li><li>Key visuals</li><li>Vertical drama</li><li>Social cutdowns</li><li>Explainers</li><li>App onboarding films</li><li>Scene generation</li><li>Voiceover</li><li>Live action</li>
+      </ul>
+      <ul aria-hidden="true">
+        <li>TVCs</li><li>Manifesto films</li><li>Key visuals</li><li>Vertical drama</li><li>Social cutdowns</li><li>Explainers</li><li>App onboarding films</li><li>Scene generation</li><li>Voiceover</li><li>Live action</li>
+      </ul>
+    </div>
+  </div>
+
+  <section class="section" id="capabilities">
+    <div class="wrap">
+      <div class="head">
+        <p class="mono eyebrow">Capabilities</p>
+        <h2>Seven ways to use the studio.</h2>
+        <p class="muted">Order any line on its own or combine them into a campaign. Every line is priced per unit on the rate card.</p>
+      </div>
+
+      <div class="bento">
+        <article class="panel spot cell tall c7">
+          <figure class="art" data-slot="films"><span class="ratio" aria-hidden="true">16:9</span></figure>
+          <div class="cell-body">
+            <h3>Films</h3>
+            <p>TVCs, brand and manifesto films, explainers, and app onboarding films.</p>
+            <p class="mono spec">6 to 60 seconds and longer</p>
+          </div>
+        </article>
+        <article class="panel spot cell tall c5">
+          <figure class="art" data-slot="key-visuals"><span class="ratio" aria-hidden="true">1:1</span></figure>
+          <div class="cell-body">
+            <h3>Key visuals</h3>
+            <p>Campaign key visuals from concept to final art, extended to every placement.</p>
+            <p class="mono spec">Print and digital</p>
+          </div>
+        </article>
+        <article class="panel spot cell tall c4">
+          <figure class="art" data-slot="series"><span class="ratio" aria-hidden="true">9:16</span></figure>
+          <div class="cell-body">
+            <h3>Series</h3>
+            <p>Episodic vertical drama, produced per episode with a pilot first.</p>
+            <p class="mono spec">9:16, per episode</p>
+          </div>
+        </article>
+        <article class="panel spot cell tall c8">
+          <figure class="art" data-slot="scenes"><span class="ratio" aria-hidden="true">2.39:1</span></figure>
+          <div class="cell-body">
+            <h3>Scene generation</h3>
+            <p>Characters, environments and shots generated to your board. The same character holds in every cut and every market.</p>
+            <p class="mono spec">Per scene</p>
+          </div>
+        </article>
+        <article class="panel spot cell c5">
+          <div class="cell-body">
+            <h3>Social</h3>
+            <p>Cutdowns, platform adaptations and short-form runs built from the master.</p>
+            <p class="mono spec">9:16, 1:1, 4:5</p>
+          </div>
+        </article>
+        <article class="panel spot cell c3">
+          <div class="cell-body">
+            <h3>Post</h3>
+            <p>Edit, grade, sound, voiceover and finishing.</p>
+            <p class="mono spec">Masters in every ratio</p>
+          </div>
+        </article>
+        <article class="panel spot cell c4">
+          <div class="cell-body">
+            <h3>Live action and hybrid</h3>
+            <p>A crew and a camera when the brief needs one. Stills and footage extended with AI.</p>
+            <p class="mono spec">On location</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="work">
+    <div class="wrap">
+      <div class="head">
+        <p class="mono eyebrow">Selected work</p>
+        <h2>Shown without names.</h2>
+        <p class="muted">Much of our work ships under an agency's or a brand's name, so projects are listed by category. The reel and full case studies are available on request.</p>
+      </div>
+
+      <div class="jobs">
+        <article class="panel spot job">
+          <dl class="mono">
+            <div><dt>Prod.</dt><dd>Manifesto film</dd></div>
+            <div><dt>Client</dt><dd>Beauty brand, via agency</dd></div>
+            <div><dt>Market</dt><dd>Philippines</dd></div>
+            <div><dt>Agency</dt><dd>Singapore</dd></div>
+          </dl>
+          <div class="job-body">
+            <h3>One protagonist, one day, and no frame that reads as AI.</h3>
+            <p>The brief ruled out anything that looked generated. We proved the look with a ten-second sample, then produced the full film to the agency's boards and brand guide.</p>
+          </div>
+        </article>
+        <article class="panel spot job">
+          <dl class="mono">
+            <div><dt>Prod.</dt><dd>Original series</dd></div>
+            <div><dt>Client</dt><dd>In-house original</dd></div>
+            <div><dt>Market</dt><dd>Filipino diaspora</dd></div>
+            <div><dt>Format</dt><dd>9:16 episodic</dd></div>
+          </dl>
+          <div class="job-body">
+            <h3>Vertical drama, episode after episode.</h3>
+            <p>An AI-native drama series made for phones. Characters, sets and Tagalog lip-sync hold from one episode to the next.</p>
+          </div>
+        </article>
+        <article class="panel spot job">
+          <dl class="mono">
+            <div><dt>Prod.</dt><dd>Event film</dd></div>
+            <div><dt>Client</dt><dd>Football legends festival</dd></div>
+            <div><dt>Market</dt><dd>Thailand</dd></div>
+            <div><dt>Format</dt><dd>16:9 master</dd></div>
+          </dl>
+          <div class="job-body">
+            <h3>A festival film for a Bangkok client.</h3>
+            <p>An AI-produced film promoting a legends football festival, revised with the client through to delivery.</p>
+          </div>
+        </article>
+        <article class="panel spot job">
+          <dl class="mono">
+            <div><dt>Prod.</dt><dd>Intro film</dd></div>
+            <div><dt>Client</dt><dd>Recovery app</dd></div>
+            <div><dt>Market</dt><dd>United States</dd></div>
+            <div><dt>Runtime</dt><dd>About :80</dd></div>
+          </dl>
+          <div class="job-body">
+            <h3>Eighty seconds to introduce a workers' recovery app.</h3>
+            <p>A cinematic explainer with minimal voiceover. The client's own app screens are animated into the story of people getting back to everyday life.</p>
+          </div>
+        </article>
+      </div>
+      <p class="also"><b>Also in the reel:</b> a fashion designer's campaign film, content for a food and beverage brand, and product visuals for a direct-to-consumer cookie brand.</p>
+    </div>
+  </section>
+
+  <section class="section" id="process">
+    <div class="wrap">
+      <div class="head">
+        <p class="mono eyebrow">Process</p>
+        <h2>Approve ten seconds before we make sixty.</h2>
+        <p class="muted">AI generation is not repeatable by default. The process is built so that you see and sign off the look before production volume begins.</p>
+      </div>
+      <div class="strip" aria-hidden="true"><span class="lane"><i></i></span></div>
+      <ol class="steps">
+        <li>
+          <span class="mono n">01</span>
+          <h3>Brief</h3>
+          <p>Send a brief, a board, or a handful of phone photos. We work from whatever you have.</p>
+        </li>
+        <li>
+          <span class="mono n">02</span>
+          <h3>Alignment</h3>
+          <p>Character sheets, storyboards and look references, agreed before anything is generated.</p>
+        </li>
+        <li>
+          <span class="mono n">03</span>
+          <h3>Sample</h3>
+          <p>A ten-second sample in the final look. You approve it, or we adjust it.</p>
+        </li>
+        <li>
+          <span class="mono n">04</span>
+          <h3>Production</h3>
+          <p>Generation, a shoot where the brief needs one, then edit, grade and sound.</p>
+        </li>
+        <li>
+          <span class="mono n">05</span>
+          <h3>Delivery</h3>
+          <p>Masters in every ratio, with a record of how each asset was made and the usage rights that apply.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="section" id="agencies">
+    <div class="wrap split">
+      <div class="head">
+        <p class="mono eyebrow">For agencies</p>
+        <h2>Your agency's AI production company.</h2>
+        <p class="muted">You keep the client and the creative lead. We produce behind your name and give your team what it needs to present the work up the chain.</p>
+      </div>
+      <dl class="terms">
+        <div>
+          <dt>Boards you can present</dt>
+          <dd>Character development sheets and storyboards built for your client meeting, before production starts.</dd>
+        </div>
+        <div>
+          <dt>A rate card you can quote</dt>
+          <dd>Per-unit prices for each deliverable, so you can scope a campaign without waiting on an estimate.</dd>
+        </div>
+        <div>
+          <dt>No surprise line items</dt>
+          <dd>Revision rounds and the types of change they cover are written into the scope before we begin.</dd>
+        </div>
+        <div>
+          <dt>Traceable output</dt>
+          <dd>Each delivery records how its assets were made, which keeps legal and brand review straightforward.</dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="section" id="rates">
+    <div class="wrap split">
+      <div class="head">
+        <p class="mono eyebrow">Rates</p>
+        <h2>One menu, three tiers.</h2>
+        <p class="muted">The same menu is priced for three sizes of project, quoted in Philippine pesos or US dollars. Usage rights are priced separately, so you pay for the reach you need.</p>
+        <ul class="tiers" aria-label="Rate card tiers">
+          <li>Small brand</li>
+          <li>Mid-size campaign</li>
+          <li>Big agency campaign</li>
+        </ul>
+      </div>
+      <ul class="panel menu mono">
+        <li><span>AI key visual</span><span>Per visual</span></li>
+        <li><span>TVC and film</span><span>:06 to :60</span></li>
+        <li><span>Scene generation</span><span>Per scene</span></li>
+        <li><span>Character consistency</span><span>Per character</span></li>
+        <li><span>Post-production</span><span>Per film</span></li>
+        <li><span>Social adaptation</span><span>Per cut</span></li>
+        <li><span>Usage rights</span><span>By reach and term</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section" id="contact">
+    <div class="wrap">
+      <div class="cta">
+        <h2>Send the brief.</h2>
+        <p class="lede">A brief, a board or a rough idea is enough to start. We reply with a scope, a rate and a plan for the sample.</p>
+        <div class="mail">
+          <a id="email-link" href="mailto:hello@n-haus.com">hello@n-haus.com</a>
+          <button class="btn small copy" type="button" id="copy-email" data-state="idle"><span class="lbl a">Copy address</span><span class="lbl b" aria-hidden="true">Copied</span></button>
+          <span class="sr" role="status" id="copy-status"></span>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <span class="mark">RUNWAY<i>.</i>STUDIO</span>
+    <span>Manila, Philippines</span>
+    <span>© 2026 Runway Studio</span>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* Hero: a runway at night, seen on approach. Edge lights and a coral centreline
+     in perspective, moving toward the camera. One still frame under reduced motion. */
+  var c = document.getElementById('rwy');
+  if (c && c.getContext) {
+    var ctx = c.getContext('2d');
+    var W = 0, H = 0, running = false, visible = true, t0 = null;
+    var city = [];
+    for (var k = 0; k < 90; k++) {
+      city.push({ x: (k * 0.61803 % 1) * 2 - 1, y: (k * 0.41421 % 1), a: 0.25 + (k * 0.7321 % 1) * 0.55, warm: k % 3 === 0 });
+    }
+    function size() {
+      var dpr = Math.min(window.devicePixelRatio || 1, 2);
+      var r = c.getBoundingClientRect();
+      W = r.width; H = r.height;
+      c.width = Math.max(1, Math.round(W * dpr));
+      c.height = Math.max(1, Math.round(H * dpr));
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+    function dot(x, y, r, rgb, a) {
+      ctx.fillStyle = 'rgba(' + rgb + ',' + (a * 0.22).toFixed(3) + ')';
+      ctx.beginPath(); ctx.arc(x, y, r * 3.2, 0, 6.2832); ctx.fill();
+      ctx.fillStyle = 'rgba(' + rgb + ',' + a.toFixed(3) + ')';
+      ctx.beginPath(); ctx.arc(x, y, r, 0, 6.2832); ctx.fill();
+    }
+    function draw(ms) {
+      var wide = W >= 900;
+      var vx = W * (wide ? 0.74 : 0.5);
+      var vy = wide ? H * 0.36 : H - 250;
+      var f = (wide ? H : W) * 0.9;
+      var camH = 0.5;
+      var edge = 0.58;
+      function nearFade(z) { return Math.max(0, Math.min(1, (z - 0.45) / 0.7)); }
+      ctx.clearRect(0, 0, W, H);
+
+      // glow of the city at the horizon
+      var g = ctx.createRadialGradient(vx, vy, 0, vx, vy, Math.max(W, H) * 0.62);
+      g.addColorStop(0, 'rgba(255,92,77,0.30)');
+      g.addColorStop(0.3, 'rgba(255,92,77,0.09)');
+      g.addColorStop(1, 'rgba(255,92,77,0)');
+      ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+
+      // distant city lights, a thin band on the horizon
+      for (var i = 0; i < city.length; i++) {
+        var s = city[i];
+        dot(vx + s.x * W * 0.62, vy - 3 - s.y * 9, 0.9, s.warm ? '255,139,125' : '255,233,214', s.a * 0.7);
+      }
+
+      var off = reduce ? 0.35 : ((ms || 0) * 0.00042) % 1;
+      function px(x, z) { return vx + (x / z) * f; }
+      function py(z) { return vy + (camH / z) * f; }
+
+      // centreline dashes
+      for (var d = 0; d < 26; d++) {
+        var z1 = 0.42 + (d - off) * 0.62, z2 = z1 + 0.26;
+        if (z1 < 0.36) continue;
+        var a1 = Math.min(1, 2.4 / z1) * 0.9 * nearFade(z1);
+        ctx.fillStyle = 'rgba(255,92,77,' + a1.toFixed(3) + ')';
+        ctx.beginPath();
+        ctx.moveTo(px(-0.035, z1), py(z1)); ctx.lineTo(px(0.035, z1), py(z1));
+        ctx.lineTo(px(0.035, z2), py(z2)); ctx.lineTo(px(-0.035, z2), py(z2));
+        ctx.closePath(); ctx.fill();
+      }
+      // edge lights, both sides
+      for (var e = 0; e < 40; e++) {
+        var z = 0.4 + (e - off) * 0.4;
+        if (z < 0.36) continue;
+        var a = Math.min(1, 2.0 / z) * nearFade(z);
+        var r = Math.max(0.7, 2.2 / z);
+        dot(px(-edge, z), py(z), r, '255,233,214', a);
+        dot(px(edge, z), py(z), r, '255,233,214', a);
+      }
+    }
+    function frame(ms) {
+      if (!running) return;
+      if (t0 === null) t0 = ms;
+      draw(ms - t0);
+      requestAnimationFrame(frame);
+    }
+    function start() { if (!running && !reduce && visible) { running = true; requestAnimationFrame(frame); } }
+    function stop() { running = false; }
+    size(); draw(0);
+    if (window.ResizeObserver) { new ResizeObserver(function () { size(); if (!running) draw(0); }).observe(c); }
+    if (window.IntersectionObserver) {
+      new IntersectionObserver(function (en) { visible = en[0].isIntersecting; if (visible) start(); else stop(); }).observe(c);
+    }
+    start();
+  }
+
+  /* Spotlight: a soft light follows the pointer inside each panel. It is decorative,
+     so it only exists for a mouse or trackpad, and it trails the pointer on a spring
+     (duration 0.5, bounce 0.2) instead of being pinned to it. The light is moved by
+     its own transform; nothing else on the page is restyled. */
+  var fine = window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  if (fine && !reduce) {
+    var K = 157.9, D = 20.1;
+    var panels = document.querySelectorAll('.spot');
+    for (var pi = 0; pi < panels.length; pi++) {
+      (function (panel) {
+        var glow = document.createElement('span');
+        glow.className = 'glow';
+        glow.setAttribute('aria-hidden', 'true');
+        panel.insertBefore(glow, panel.firstChild);
+        var x = 0, y = 0, vx = 0, vy = 0, tx = 0, ty = 0, raf = 0, last = 0, inside = false;
+        function place() { glow.style.transform = 'translate(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px)'; }
+        function step(now) {
+          var dt = Math.min(0.032, (now - last) / 1000 || 0.016);
+          last = now;
+          vx += (K * (tx - x) - D * vx) * dt; x += vx * dt;
+          vy += (K * (ty - y) - D * vy) * dt; y += vy * dt;
+          place();
+          var settled = Math.abs(tx - x) < 0.2 && Math.abs(ty - y) < 0.2 && Math.abs(vx) < 2 && Math.abs(vy) < 2;
+          raf = (inside || !settled) ? requestAnimationFrame(step) : 0;
+        }
+        function aim(ev) {
+          var b = panel.getBoundingClientRect();
+          tx = ev.clientX - b.left; ty = ev.clientY - b.top;
+        }
+        panel.addEventListener('pointerenter', function (ev) {
+          aim(ev); x = tx; y = ty; vx = vy = 0; inside = true; place();
+          if (!raf) { last = performance.now(); raf = requestAnimationFrame(step); }
+        });
+        panel.addEventListener('pointermove', aim);
+        panel.addEventListener('pointerleave', function () { inside = false; });
+      })(panels[pi]);
+    }
+  }
+
+  /* Copy the email address. The label swaps to confirm; if the clipboard is refused,
+     the address is selected instead and the label says so. */
+  var btn = document.getElementById('copy-email');
+  var link = document.getElementById('email-link');
+  var said = document.getElementById('copy-status');
+  if (btn && link) {
+    var done = btn.querySelector('.lbl.b');
+    var timer = 0;
+    function confirmWith(word) {
+      done.textContent = word;
+      btn.setAttribute('data-state', 'done');
+      if (said) said.textContent = word;
+      clearTimeout(timer);
+      timer = setTimeout(function () { btn.setAttribute('data-state', 'idle'); if (said) said.textContent = ''; }, 2000);
+    }
+    btn.addEventListener('click', function () {
+      var address = link.textContent.trim();
+      function selectIt() {
+        var range = document.createRange();
+        range.selectNodeContents(link);
+        var sel = window.getSelection();
+        sel.removeAllRanges();
+        sel.addRange(range);
+        confirmWith('Selected');
+      }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(address).then(function () { confirmWith('Copied'); }, selectIt);
+      } else {
+        selectIt();
+      }
+    });
+  }
+})();
+</script>
+</body>
+</html>
