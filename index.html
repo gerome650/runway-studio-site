@@ -5,6 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Runway Studio | AI production studio, Manila</title>
 <meta name="description" content="Runway Studio is an AI production studio out of Manila, Philippines. Films, key visuals, social content and episodic series for agencies and brands.">
+<link rel="canonical" href="https://www.runwaystudio.ph/">
+<meta property="og:url" content="https://www.runwaystudio.ph/">
+<meta property="og:image" content="https://www.runwaystudio.ph/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Runway Studio. Brief in. Broadcast-ready out.">
+<meta name="twitter:card" content="summary_large_image">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Runway Studio">
 <meta property="og:title" content="Runway Studio | AI production studio, Manila">
@@ -33,7 +40,7 @@ img { max-width: 100%; }
   --line-2: #35353D;
   --text: #F4F3F1;
   --muted: #A4A4AE;
-  --faint: #74747F;
+  --faint: #7E7E89;
   --coral: #FF5C4D;
   --coral-soft: #FF8B7D;
   --on-coral: #190705;
@@ -75,6 +82,9 @@ h1, h2, h3 { text-wrap: balance; font-family: var(--f-display); }
 :focus-visible { outline: 2px solid var(--coral); outline-offset: 3px; border-radius: 6px; }
 ::selection { background: var(--coral); color: var(--on-coral); }
 
+.skip { position: absolute; left: 12px; top: 12px; z-index: 30; padding: 10px 16px; border-radius: 999px; background: var(--coral); color: var(--on-coral); font-weight: 600; font-size: var(--t-sm); text-decoration: none; transform: translateY(-200%); }
+.skip:focus { transform: none; }
+
 .wrap { max-width: 1200px; margin-inline: auto; padding-inline: var(--gutter); }
 .mono { font-family: var(--f-mono); font-size: var(--t-xs); letter-spacing: 0.06em; text-transform: uppercase; }
 .muted { color: var(--muted); }
@@ -107,7 +117,9 @@ h1, h2, h3 { text-wrap: balance; font-family: var(--f-display); }
   .btn.primary:hover { border-color: var(--coral-soft); background: var(--coral-soft); }
 }
 .btn.small { padding: 9px 16px; font-size: 0.8125rem; }
+.nav .btn { flex-shrink: 0; white-space: nowrap; }
 .copy { display: inline-grid; }
+@media (pointer: coarse) { .copy { min-height: 44px; align-items: center; } }
 .copy .lbl {
   grid-area: 1 / 1;
   transition: opacity 200ms var(--ease), transform 200ms var(--ease), filter 200ms var(--ease);
@@ -150,6 +162,11 @@ h1, h2, h3 { text-wrap: balance; font-family: var(--f-display); }
 .links a { text-decoration: none; transition: color 150ms ease; }
 @media (hover: hover) and (pointer: fine) { .links a:hover { color: var(--text); } }
 @media (min-width: 900px) { .links { display: flex; } }
+@media (max-width: 359px) {
+  .nav-in { gap: 10px; padding-left: 14px; }
+  .mark { font-size: 0.9375rem; }
+  .nav .btn { padding-inline: 13px; }
+}
 
 /* hero */
 .hero { position: relative; overflow: hidden; margin-top: -68px; padding-top: 68px; }
@@ -285,7 +302,7 @@ h1, h2, h3 { text-wrap: balance; font-family: var(--f-display); }
 @media (min-width: 820px) { .jobs { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 .job { display: flex; flex-direction: column; }
 .job dl { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px 18px; padding: 20px 22px; border-bottom: 1px dashed var(--line-2); }
-.job dt { color: var(--faint); font-size: 0.6875rem; }
+.job dt { color: var(--faint); font-size: 0.75rem; }
 .job dd { margin-top: 3px; font-size: var(--t-xs); letter-spacing: 0.04em; }
 .job-body { position: relative; display: grid; gap: 10px; padding: 22px 22px 26px; }
 .job h3 { font-size: 1.5rem; font-weight: 700; line-height: 1.12; letter-spacing: -0.02em; }
@@ -377,7 +394,7 @@ h1, h2, h3 { text-wrap: balance; font-family: var(--f-display); }
 .mail a {
   font-family: var(--f-display);
   font-weight: 700;
-  font-size: clamp(1.3rem, 2.2vw + 0.8rem, 2.1rem);
+  font-size: min(5.6vw, clamp(1.3rem, 2.2vw + 0.8rem, 2.1rem));
   letter-spacing: -0.02em;
   text-decoration-color: var(--coral);
   text-decoration-thickness: 2px;
@@ -414,6 +431,7 @@ h1, h2, h3 { text-wrap: balance; font-family: var(--f-display); }
 </style>
 </head>
 <body>
+<a class="skip" href="#top">Skip to content</a>
 <header class="nav">
   <div class="wrap">
     <div class="nav-in">
@@ -449,7 +467,7 @@ h1, h2, h3 { text-wrap: balance; font-family: var(--f-display); }
     </div>
   </section>
 
-  <div class="ticker mono" aria-label="What we deliver">
+  <div class="ticker mono" role="group" aria-label="What we deliver">
     <div class="ticker-track">
       <ul>
         <li>TVCs</li><li>Manifesto films</li><li>Key visuals</li><li>Vertical drama</li><li>Social cutdowns</li><li>Explainers</li><li>App onboarding films</li><li>Scene generation</li><li>Voiceover</li><li>Live action</li>
@@ -684,7 +702,7 @@ h1, h2, h3 { text-wrap: balance; font-family: var(--f-display); }
         <h2>Send the brief.</h2>
         <p class="lede">A brief, a board or a rough idea is enough to start. We reply with a scope, a rate and a plan for the sample.</p>
         <div class="mail">
-          <a id="email-link" href="mailto:hello@n-haus.com">hello@n-haus.com</a>
+          <a id="email-link" href="mailto:projects@runwaystudio.ph">projects@runwaystudio.ph</a>
           <button class="btn small copy" type="button" id="copy-email" data-state="idle"><span class="lbl a">Copy address</span><span class="lbl b" aria-hidden="true">Copied</span></button>
           <span class="sr" role="status" id="copy-status"></span>
         </div>
